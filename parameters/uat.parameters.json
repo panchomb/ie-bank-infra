@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "environmentType": {
+            "value": "nonprod"
+        },
+        "postgreSQLServerName": {
+            "value": "panchomb-dbsrv-uat"
+        },
+        "postgreSQLDatabaseName": {
+            "value": "panchomb-db-uat"
+        },
+        "appServicePlanName": {
+            "value": "panchomb-asp-uat"
+        },
+        "appServiceAPIAppName": {
+            "value": "panchomb-be-uat"
+        },
+        "appServiceAppName": {
+            "value": "panchomb-fe-uat"
+        },
+        "location": {
+            "value": "West Europe"
+        }
+    }
+}
