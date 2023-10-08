@@ -46,7 +46,7 @@ jobs:
 
   deploy-uat:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, deploy-dev]
     environment:
       name: 'UAT'
 
