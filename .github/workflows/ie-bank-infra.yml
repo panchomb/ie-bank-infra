@@ -49,6 +49,12 @@ jobs:
     needs: [build, deploy-dev]
     environment:
       name: 'UAT'
+    env:
+      ENV: uat
+      DBHOST: panchomb-dbsrv-uat.postgres.database.azure.com
+      DBNAME: panchomb-db-uat
+      FLASK_APP: app.py
+      FLASK_DEBUG: 1
 
     steps:
 
@@ -67,4 +73,4 @@ jobs:
         subscriptionId: ${{ env.SUBSCRIPTION_ID_DEV }}
         resourceGroupName: ${{ env.RESOURCE_GROUP_DEV }}
         template: ./main.bicep
-        parameters: ./parameters/uat.parameters.json appServiceAPIEnvVarENV=uat appServiceAPIEnvVarDBHOST=${{ vars.DBHOST_UAT }} appServiceAPIEnvVarDBNAME=${{ vars.DBNAME_UAT }} appServiceAPIEnvVarDBPASS=${{ secrets.DBPASS }} appServiceAPIDBHostDBUSER=${{ secrets.DBUSER }} appServiceAPIDBHostFLASK_APP=${{ vars.FLASK_APP }} appServiceAPIDBHostFLASK_DEBUG=${{ vars.FLASK_DEBUG }}
+        parameters: ./parameters/uat.parameters.json appServiceAPIEnvVarENV=uat appServiceAPIEnvVarDBHOST=${{ env.DBHOST }} appServiceAPIEnvVarDBNAME=${{ env.DBNAME }} appServiceAPIEnvVarDBPASS=${{ secrets.DBPASS }} appServiceAPIDBHostDBUSER=${{ secrets.DBUSER }} appServiceAPIDBHostFLASK_APP=${{ env.FLASK_APP }} appServiceAPIDBHostFLASK_DEBUG=${{ env.FLASK_DEBUG }}
