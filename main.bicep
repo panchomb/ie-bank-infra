@@ -29,7 +29,7 @@ param azureMonitorName string
 @sys.description('The name of the Application Insights')
 param appInsightsName string
 @sys.description('The Instrumentation Key for the Application Insights')
-param appInsightsInstrumentationKey string
+param appInsightsInstrumentationKey string = ''
 @sys.description('The Azure location where the resources will be deployed')
 param location string = resourceGroup().location
 @sys.description('The value for the environment variable ENV')
@@ -126,6 +126,7 @@ module appService 'modules/app-service.bicep' = {
   }
   dependsOn: [
     postgresSQLDatabase
+    appInsights
   ]
 }
 
