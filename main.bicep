@@ -28,8 +28,6 @@ param appServiceAPIAppName string = 'ie-bank-api-dev'
 param azureMonitorName string
 @sys.description('The name of the Application Insights')
 param appInsightsName string
-@sys.description('The instrumentation key of the ApplicationInsights')
-param appInsightsInstrumentationKey string = ''
 @sys.description('The Azure location where the resources will be deployed')
 param location string = resourceGroup().location
 @sys.description('The value for the environment variable ENV')
