@@ -20,6 +20,12 @@
         "appServiceAppName": {
             "value": "panchomb-fe-dev"
         },
+        "azureMonitorName": {
+            "value": "panchomb-am-dev"
+        },
+        "appInsightsName": {
+            "value": "panchomb-ai-dev"
+        },
         "location": {
             "value": "West Europe"
         }

@@ -20,6 +20,12 @@
         "appServiceAppName": {
             "value": "panchomb-fe-uat"
         },
+        "azureMonitorName": {
+            "value": "panchomb-am-uat"
+        },
+        "appInsightsName": {
+            "value": "panchomb-ai-uat"
+        },
         "location": {
             "value": "West Europe"
         }

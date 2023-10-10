@@ -73,6 +73,10 @@ resource appServiceAPIApp 'Microsoft.Web/sites@2022-03-01' = {
           name: 'SCM_DO_BUILD_DURING_DEPLOYMENT'
           value: 'true'
         }
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: '3c75b957-a1d0-4ddb-ab2d-a0521c35c566'
+        }
       ]
     }
   }
