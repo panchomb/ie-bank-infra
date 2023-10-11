@@ -5,6 +5,12 @@
         "environmentType": {
             "value": "nonprod"
         },
+        "postgreSQLServerName": {
+            "value": "panchomb-dbsrv-dev"
+        },
+        "postgreSQLDatabaseName": {
+            "value": "panchomb-db-dev"
+        },
         "appServicePlanName": {
             "value": "panchomb-asp-dev"
         },

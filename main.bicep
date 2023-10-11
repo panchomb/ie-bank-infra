@@ -4,14 +4,14 @@
   'prod'
 ])
 param environmentType string = 'nonprod'
-// @sys.description('The PostgreSQL Server name')
-// @minLength(3)
-// @maxLength(24)
-// param postgreSQLServerName string = 'ie-bank-db-server-dev'
-// @sys.description('The PostgreSQL Database name')
-// @minLength(3)
-// @maxLength(24)
-// param postgreSQLDatabaseName string = 'ie-bank-db'
+@sys.description('The PostgreSQL Server name')
+@minLength(3)
+@maxLength(24)
+param postgreSQLServerName string = 'ie-bank-db-server-dev'
+@sys.description('The PostgreSQL Database name')
+@minLength(3)
+@maxLength(24)
+param postgreSQLDatabaseName string = 'ie-bank-db'
 @sys.description('The App Service Plan name')
 @minLength(3)
 @maxLength(24)
@@ -48,53 +48,53 @@ param appServiceAPIDBHostFLASK_APP string
 @sys.description('The value for the environment variable FLASK_DEBUG')
 param appServiceAPIDBHostFLASK_DEBUG string
 
-// resource postgresSQLServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
-//   name: postgreSQLServerName
-//   location: location
-//   sku: {
-//     name: 'Standard_B1ms'
-//     tier: 'Burstable'
-//   }
-//   properties: {
-//     administratorLogin: 'iebankdbadmin'
-//     administratorLoginPassword: 'IE.Bank.DB.Admin.Pa$$'
-//     createMode: 'Default'
-//     highAvailability: {
-//       mode: 'Disabled'
-//       standbyAvailabilityZone: ''
-//     }
-//     storage: {
-//       storageSizeGB: 32
-//     }
-//     backup: {
-//       backupRetentionDays: 7
-//       geoRedundantBackup: 'Disabled'
-//     }
-//     version: '15'
-//   }
+resource postgresSQLServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
+  name: postgreSQLServerName
+  location: location
+  sku: {
+    name: 'Standard_B1ms'
+    tier: 'Burstable'
+  }
+  properties: {
+    administratorLogin: 'iebankdbadmin'
+    administratorLoginPassword: 'IE.Bank.DB.Admin.Pa$$'
+    createMode: 'Default'
+    highAvailability: {
+      mode: 'Disabled'
+      standbyAvailabilityZone: ''
+    }
+    storage: {
+      storageSizeGB: 32
+    }
+    backup: {
+      backupRetentionDays: 7
+      geoRedundantBackup: 'Disabled'
+    }
+    version: '15'
+  }
 
-//   resource postgresSQLServerFirewallRules 'firewallRules@2022-12-01' = {
-//     name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
-//     properties: {
-//       endIpAddress: '0.0.0.0'
-//       startIpAddress: '0.0.0.0'
-//     }
-//   }
-// }
+  resource postgresSQLServerFirewallRules 'firewallRules@2022-12-01' = {
+    name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
+    properties: {
+      endIpAddress: '0.0.0.0'
+      startIpAddress: '0.0.0.0'
+    }
+  }
+}
 
-// resource postgresSQLDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2022-12-01' = {
-//   name: postgreSQLDatabaseName
-//   parent: postgresSQLServer
-//   properties: {
-//     charset: 'UTF8'
-//     collation: 'en_US.UTF8'
-//   }
-// }
+resource postgresSQLDatabase 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2022-12-01' = {
+  name: postgreSQLDatabaseName
+  parent: postgresSQLServer
+  properties: {
+    charset: 'UTF8'
+    collation: 'en_US.UTF8'
+  }
+}
 
-// resource azureMonitor 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
-//   name: azureMonitorName
-//   location: location
-// }
+resource azureMonitor 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
+  name: azureMonitorName
+  location: location
+}
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: appInsightsName
@@ -124,9 +124,9 @@ module appService 'modules/app-service.bicep' = {
     appServiceAPIEnvVarENV: appServiceAPIEnvVarENV
     appInsightsInstrumentationKey: appInsights.properties.InstrumentationKey
   }
-  // dependsOn: [
-  //   postgresSQLDatabase
-  // ]
+  dependsOn: [
+    postgresSQLDatabase
+  ]
 }
 
 output appServiceAppHostName string = appService.outputs.appServiceAppHostName
